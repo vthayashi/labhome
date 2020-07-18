@@ -1,0 +1,96 @@
+I-Logix-RPY-Archive version 8.15.0 * 202002261110
+
+- m_fileModifyTime = { IRPYRawContainer 
+	- size = 31;
+	- value = "DefaultComponent/DefaultConfig/Arduinoprogram.c" 7.18.2020::18:44:32
+	"DefaultComponent/DefaultConfig/Arduinoprogram.h" 7.18.2020::18:44:32
+	"DefaultComponent/DefaultConfig/CSS.c" 7.18.2020::18:34:8
+	"DefaultComponent/DefaultConfig/CSS.h" 7.18.2020::18:34:8
+	"DefaultComponent/DefaultConfig/Default.c" 7.18.2020::18:34:39
+	"DefaultComponent/DefaultConfig/Default.h" 7.18.2020::18:53:20
+	"DefaultComponent/DefaultConfig/ESP32.c" 7.18.2020::18:30:26
+	"DefaultComponent/DefaultConfig/ESP32.h" 7.18.2020::18:30:26
+	"DefaultComponent/DefaultConfig/celular.c" 7.18.2020::18:28:30
+	"DefaultComponent/DefaultConfig/celular.h" 7.18.2020::18:28:30
+	"DefaultComponent/DefaultConfig/class_2.c" 7.18.2020::18:28:45
+	"DefaultComponent/DefaultConfig/class_2.h" 7.18.2020::18:28:45
+	"DefaultComponent/DefaultConfig/class_3.c" 7.18.2020::18:31:13
+	"DefaultComponent/DefaultConfig/class_3.h" 7.18.2020::18:31:13
+	"DefaultComponent/DefaultConfig/class_4.c" 7.18.2020::18:31:17
+	"DefaultComponent/DefaultConfig/class_4.h" 7.18.2020::18:31:17
+	"DefaultComponent/DefaultConfig/coletor.c" 7.18.2020::18:32:38
+	"DefaultComponent/DefaultConfig/coletor.h" 7.18.2020::18:32:37
+	"DefaultComponent/DefaultConfig/data.c" 7.18.2020::18:34:10
+	"DefaultComponent/DefaultConfig/data.h" 7.18.2020::18:34:10
+	"DefaultComponent/DefaultConfig/htm.c" 7.18.2020::18:29:25
+	"DefaultComponent/DefaultConfig/htm.h" 7.18.2020::18:29:25
+	"DefaultComponent/DefaultConfig/object_0.c" 7.18.2020::18:31:40
+	"DefaultComponent/DefaultConfig/object_0.h" 7.18.2020::18:31:40
+	"E:/Documentos/2020.07.18 CBIE 2020/LabHome_modelo/DefaultComponent/DefaultConfig/Arduinoprogram.h" 7.18.2020::18:44:32
+	"E:/Documentos/2020.07.18 CBIE 2020/LabHome_modelo/DefaultComponent/DefaultConfig/CSS.h" 7.18.2020::18:34:8
+	"E:/Documentos/2020.07.18 CBIE 2020/LabHome_modelo/DefaultComponent/DefaultConfig/Default.h" 7.18.2020::18:34:39
+	"E:/Documentos/2020.07.18 CBIE 2020/LabHome_modelo/DefaultComponent/DefaultConfig/ESP32.h" 7.18.2020::18:30:26
+	"E:/Documentos/2020.07.18 CBIE 2020/LabHome_modelo/DefaultComponent/DefaultConfig/celular.h" 7.18.2020::18:28:30
+	"E:/Documentos/2020.07.18 CBIE 2020/LabHome_modelo/DefaultComponent/DefaultConfig/coletor.h" 7.18.2020::18:32:37
+	"E:/Documentos/2020.07.18 CBIE 2020/LabHome_modelo/DefaultComponent/DefaultConfig/htm.h" 7.18.2020::18:29:25
+	
+}
+- m_saveUnitAndOwnerSaveUnit = { IRPYRawContainer 
+	- size = 1;
+	- value = "GUID 6c4d6171-d51b-4558-9310-56b3a1737c6a" "GUID b485b2b4-8e1b-4703-b2ee-2430a83ffe89"
+	
+}
+- size = 7;
+- hElement = { IHandle 
+	- _m2Class = "*";
+	- _id = GUID 2e129895-374d-41f9-9419-c222f7f4b658;
+}
+- genTime = 7.18.2020::18:32:38;
+- hElement = { IHandle 
+	- _m2Class = "IClass";
+	- _filename = ".\\..\\..\\LabHome_modelo_rpy\\Default.sbsx";
+	- _subsystem = "Default";
+	- _name = "Arduinoprogram";
+	- _id = GUID 770fb539-e362-4265-8697-fd51a02729b2;
+}
+- genTime = 7.18.2020::18:46:0;
+- hElement = { IHandle 
+	- _m2Class = "IClass";
+	- _filename = ".\\..\\..\\LabHome_modelo_rpy\\Default.sbsx";
+	- _subsystem = "Default";
+	- _name = "celular";
+	- _id = GUID 44ad7b53-4140-41ee-863d-47d37513e5d1;
+}
+- genTime = 7.18.2020::18:28:30;
+- hElement = { IHandle 
+	- _m2Class = "IClass";
+	- _filename = ".\\..\\..\\LabHome_modelo_rpy\\Default.sbsx";
+	- _subsystem = "Default";
+	- _name = "ESP32";
+	- _id = GUID 283285b9-be3f-4cdd-a89a-a75c74683b4b;
+}
+- genTime = 7.18.2020::18:30:26;
+- hElement = { IHandle 
+	- _m2Class = "ISubsystem";
+	- _filename = ".\\..\\..\\LabHome_modelo_rpy\\Default.sbsx";
+	- _name = "Default";
+	- _id = GUID 6c4d6171-d51b-4558-9310-56b3a1737c6a;
+}
+- genTime = 7.18.2020::18:54:6;
+- hElement = { IHandle 
+	- _m2Class = "IClass";
+	- _filename = ".\\..\\..\\LabHome_modelo_rpy\\Default.sbsx";
+	- _subsystem = "Default";
+	- _name = "CSS";
+	- _id = GUID 97787c79-6329-44da-a287-6e583fd0fae6;
+}
+- genTime = 7.18.2020::18:34:8;
+- hElement = { IHandle 
+	- _m2Class = "IClass";
+	- _filename = ".\\..\\..\\LabHome_modelo_rpy\\Default.sbsx";
+	- _subsystem = "Default";
+	- _name = "htm";
+	- _id = GUID 3f3c80e7-5c7b-497f-ae55-9a799602a661;
+}
+- genTime = 7.18.2020::18:29:25;
+
