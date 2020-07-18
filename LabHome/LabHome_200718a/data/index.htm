@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+  <style>
+    button{cursor:hand;border:solid 1px silver;width:300px;height:32px;margin:2px;border-radius:4px;}
+  </style>
+  <div align="center">
+    <hr width="320">
+    <button onclick="location.href=this.innerHTML;">motor2.htm</button><br>
+    <button onclick="abrir(this.innerHTML);">DelorenzoDelta127</button><br>
+    <button onclick="abrir(this.innerHTML);">DelorenzoEstrela127</button><br>
+    <button onclick="abrir(this.innerHTML);">Educare70V10R</button>
+    <br><hr width="320">
+    <a href='/upload'>Arquivos</a>
+    <br><a href='/edit'>edit</a>
+    <br><a href='/update'>Update (Firmware)</a>
+    <br><hr width="320">
+  </div>
+  <script>
+    function abrir(xx){location.href='motor2.htm?path='+xx+'.txt';}
+  </script>
+  </body>
+</html>

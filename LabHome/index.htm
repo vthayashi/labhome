@@ -1,0 +1,279 @@
+<html>
+<head>
+<meta name='viewport' content='width=device-width, initial-scale=0.9'>
+<style>
+	body{margin:0;}
+	label{color:silver;}
+	input[type=button]{height:36px;color:silver;background-color:black;font:15px Arial;border:solid 1px gray;border-radius:12px;}
+	input[type=number]{height:32px;opacity: 1;font:15px Arial;border:solid 1px;border-radius:6px;color:silver;background-color:black;}
+	input[type=number]::-webkit-inner-spin-button{opacitys: 1;height:28px;}
+	select{height:32px;font:15px Arial;border-radius:6px;
+	color:silver;background-color:black;text-align-last:center;}
+	select::-ms-expand {display: none;}
+	input[type=range] {-webkit-appearance:none;height:32px;margin:0;
+	border-radius:6px;background:gray;}
+	input[type=range]:focus {outline:none;}
+	input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;box-shadow: 0px 0px 0px #000000;height:30px;backgroundxx: #A1D0FF;background: #70A0A0;cursor:pointer;
+	width:10px;border:none;border-radius:6px;}
+</style>
+<script>
+var g_wid=400, g_hei=264, g_top=0, g_left=0;
+var g_cor=["#404040","#FF0000","#00FF00","#0000FF","#B0B000"];
+var ctx=[];
+var wa=[];
+var myObj=JSON.parse("{}");
+var loaded=true;
+var vref=3.3;
+var ser="";
+var w_ini=0;
+var w_us=50;
+var w_esc=10; // 1 a 10
+
+// dados para teste
+for(i=0;i<3;i++){ wa[i]=[];
+	if(i==0) for(j=0;j<200;j++){ if((j%80)<40) wa[i][j]=2.65; else wa[i][j]=0.65; }
+	if(i==1) for(j=0;j<200;j++){ angle=j/20*2*Math.PI; wa[i][j]=1.65+Math.sin(angle)*1.5; }
+	if(i==2) for(j=0;j<200;j++){ if((j%40)<20) wa[i][j]=1.15; else wa[i][j]=2.15; }
+}
+myObj=JSON.parse('{"wa":[['+wa[0]+'],['+wa[1]+'],['+wa[2]+']]}');
+//
+function iniciar(){
+	setData();
+	setInterval(loadjs,1000);
+}
+function loadjs(){
+	//graf();
+	if(loaded){
+		sa=ser;ser="";
+		sa+="w_ini="+w_ini+"&";	sa+="w_esc="+w_esc+"&";
+		//sa+="tr_port="+tr_port.value+"&";
+		//v_sinc
+		//vsinc=v_sinc.value/vref*1023;
+		//sa+="v_sinc="+vsinc.toFixed(0)+"&";
+		sa+="wa2=255&fields=vref,w_us,tr_port,w_mode&";
+		sa="js?"+sa.substring(0,sa.length-1);
+		ta01.value=sa;
+		client.open('GET',sa,true);
+		client.timeout=5000; client.send();
+		loaded=false;
+	}
+}
+
+var client=new XMLHttpRequest();
+client.onreadystatechange=function(){
+	if(this.readyState==4){
+		if (this.status==200){
+			myObj=JSON.parse(this.responseText);
+			if(typeof myObj.vref!='undefined'){vref=myObj.vref;}
+			if(typeof myObj.w_us!='undefined'){w_us=myObj.w_us;}
+			if(typeof myObj.tr_port!='undefined'){
+				tr_port=myObj.tr_port;
+				for(i=0;i<=2;i++){
+					cor="gray";
+					if(i==tr_port) cor='red';
+					eval("trA"+i).style.color=cor;
+				}
+			}
+			if(typeof myObj.w_mode!='undefined'){
+				w_mode=myObj.w_mode;
+				if(w_mode%10==1) w_mode1.style.color='red'; else w_mode1.style.color='gray';
+				if(w_mode%10==2) w_mode2.style.color='red'; else w_mode2.style.color='gray';
+				if(w_mode%10==3) w_mode3.style.color='red'; else w_mode3.style.color='gray';
+				if(w_mode<10) w_mode0.style.color='red'; else w_mode0.style.color='gray';
+				if(w_mode>10) w_mode10.style.color='red'; else w_mode10.style.color='gray';
+			}
+			//sa="w_us: "+w_us+"\n";
+			//sa+="w_esc: "+w_esc+"\n";
+			//sa+="wa.length: "+wa.length+"\n";
+			//sa+="wa[0].length: "+wa[0].length+"\n";
+			sa=this.responseText;
+			ta02.value=sa;
+		}
+		loaded=true;
+		graf();
+	}
+}
+
+</script>
+</head>
+<body onload="iniciar()">
+<style>
+	.tdhsc{width:10%;text-align:center;}
+	.zBtn  {color:silver;background-color:black;width:53px;height:32px;border:solid 1px gray;border-radius:6px;}
+	.checkBox{height:15px;padding:1px 0 0 0;cursor:hand;font:12px arial;color:gray;text-align:center;width:16px;margin:3px;border-radius:16px;border:solid 2px gray;}
+</style>
+<table border="0" cellspacing="0" cellpadding="0" style="background-color:black;"><tr>
+<td width="40" align="right" onclick="if(pontos.title!='1'){pontos.title=1;pontos.style.borderColor='yellow';}else{pontos.title=0;pontos.style.borderColor='gray';}">
+<div id="pontos" class="checkBox" alt="0" style=""></div></td>
+<td id="info" width="240" style="height:24px;text-align:center;color:gray;font:22px Arial ;">INFO</td>
+<td width="40" onclick="if(ch_en0.title!='1'){ch_en0.title='1';ch_en0.style.borderColor='red';}else{ch_en0.title='0';ch_en0.style.borderColor='gray';}">
+<div id="ch_en0" class="checkBox" title="1" style="border-color:red;">0</td>
+<td width="40" onclick="if(ch_en1.title!='1'){ch_en1.title='1';ch_en1.style.borderColor='green';}else{ch_en1.title='0';ch_en1.style.borderColor='gray';}">
+<div id="ch_en1" class="checkBox" title="1" style="border-color:green;">1</td>
+<td width="40" onclick="if(ch_en2.title!='1'){ch_en2.title='1';ch_en2.style.borderColor='blue';}else{ch_en2.title='0';ch_en2.style.borderColor='gray';}">
+<div id="ch_en2" class="checkBox" title="1" style="border-color:blue;">2</td>
+</tr></table>
+<canvas id="layer0" style="margin:0;background-color:black;"></canvas>
+<canvas id="layer1" style="margin:0;position: absolute; z-index: 2;border:none;"></canvas>
+<canvas id="layer2" style="margin:0;position: absolute; z-index: 3;border:none;"></canvas>
+<canvas id="layer3" style="margin:0;position: absolute; z-index: 4;border:none;"></canvas>
+<canvas id="layer4" style="margin:0;position: absolute; z-index: 5;border:none;"></canvas>
+<table id="tbhsc" border=0 cellspacing=0 style="font:16px Arial ;background-color:black;color:gray;"><tr>
+<td>TEMPO</td></tr></table>
+<style data="test" type="text/css"></style>
+<table width="400" cellspacing="4" cellpadding="0" style="background:#000000;color:silver;font:12px arial;"><tr>
+<td><input class="zBtn" type="button" value="z-" onclick="w_esc_mais();"></td>
+<td><input style="width:278;" id=range1 type=range min=0 max=2000 step=200 value=0 onchange="pos(this.value);"></td>
+<td><input class="zBtn" type="button" value="Z+" onclick="w_esc_menos();"></td>
+</tr>
+<tr><td colspan="3" nowrap align="center">
+<input style="width:76px;" id="msdBtn1" type="button" value="10ms" onclick="ser+='w_msd=1&';w_esc=10;pos(0);">
+<input style="width:76px;" id="msdBtn2" type="button" value="20ms" onclick="ser+='w_msd=2&';w_esc=10;pos(0);">
+<input style="width:76px;" id="msdBtn4" type="button" value="40ms" onclick="ser+='w_msd=4&';w_esc=10;pos(0);">
+<input style="width:75px;" id="msdBtn10" type="button" value="100ms" onclick="ser+='w_msd=10&';w_esc=10;pos(0);">
+<input style="width:75px;" id="msdBtn20" type="button" value="200ms" onclick="ser+='w_msd=20&';w_esc=10;pos(0);">
+</td></tr>
+</table>
+
+<table width="400" cellspacing="0" cellpadding="0" style="padding-bottom:4px;background:#000000;color:silver;font:12px arial;"><tr>
+<tr><td align="center" style="padding:0 0 4px 0;">
+	<input type="button" style="width:65px;" value="TR -">
+	<input type="text" value="1.65V" style="border:none;width:50px;text-align:center;font:16px arial;background:#000000;color:silver;">
+	<input type="button" style="width:65px;padding:0;" value="TR +">
+	<!--input id="v_sinc" type="number" min="0" max="3.3" value="1.65" step="0.05"
+		style="width:60px;text-align-last:center;"-->
+	<!--select id="tr_port" style="width:50px;margin:0 0 0 3px;;">
+		<option value="0">A0</option><option value="1">A1</option><option value="2">A2</option>
+	</select-->
+	<input id="trA0" type="button" style="width:65px;" value="A0" onclick="ser+='tr_port=0&';">
+	<input id="trA1" type="button" style="width:65px;" value="A1" onclick="ser+='tr_port=1&';">
+	<input id="trA2" type="button" style="width:65px;" value="A2" onclick="ser+='tr_port=2&';">
+	</td></tr>
+	<tr><td align="center" style="">
+	<input id="w_mode1" type="button" style="width:75px;" value="Rising" onclick="tr_mode=1&';">
+	<input id="w_mode2" type="button" style="width:75px;" value="Falling" onclick="tr_mode=2&';">
+	<input id="w_mode3" type="button" style="width:76px;" value="Change" onclick="tr_mode=3&';">
+	<input id="w_mode10" type="button" style="width:76px;" value="Auto" onclick="tr_auto=1&';">
+	<input id="w_mode0" type="button" style="width:76px;" value="Manual" onclick="tr_auto=0&';">
+</td></tr></table>
+<script>
+function w_modeFn(){
+}
+</script>
+
+<br>
+
+<div align="center" style="width:400px;">
+<input id="ser_text" type="text" style="border:solid 1px silver;border-radius:4px;">
+ <input type="button" value=" > " onclick="ser+=ser_text.value+'&';">
+</div>
+<div><textarea id="ta01" rows="2" style="width:400px;"></textarea></div>
+<div><textarea id="ta02" style="width:400px;height:100px;"></textarea></div>
+<script>
+	function w_esc_mais(){
+		if(w_esc==0.2) w_esc=0.5;
+		else if(w_esc==0.5) w_esc=1;
+		else if(w_esc==1) w_esc=2;
+		else if(w_esc==2) w_esc=5;
+		else if(w_esc==5) w_esc=10;
+		w_ini=0; range1.value=0;
+	}
+	function w_esc_menos(){
+		if(w_esc==0.5) w_esc=0.2;
+		else if(w_esc==1) w_esc=0.5;
+		else if(w_esc==2) w_esc=1;
+		else if(w_esc==5) w_esc=2;
+		else if(w_esc==10) w_esc=5;
+		w_ini=0; range1.value=0;
+	}
+  var style = document.querySelector('[data="test"]');
+  function setData(){
+	wid=278;
+	if(w_esc==0.2){ range1.max=1960; wid/=40;  range1.step=4; }
+	if(w_esc==0.5){ range1.max=1900; wid/=20;  range1.step=10; }
+	if(w_esc==1){ range1.max=1800; wid/=10;  range1.step=20; }
+	if(w_esc==2){ range1.max=1600; wid/=5;  range1.step=40; }
+	if(w_esc==5){ range1.max=1000; wid/=2; range1.step=100; }
+	if(w_esc==10){ range1.max=0;  range1.step=200; }
+    sa="input::-webkit-slider-thumb{ width: "+wid+"px !important;}";
+  	style.innerHTML=sa;
+  }
+  
+  function pos(xx){
+  	w_ini=xx;
+	for(i=0;i<=3;i++){ ctx[i].clearRect(0, 0,g_wid, g_hei); }
+	setTimeout(graf,200);
+  }
+</script>
+
+<script>
+//info.style.width=g_wid;
+g_top=info.style.height;
+for(i=0;i<=4;i++){
+  la=eval("layer"+i);
+  if(i>0){ la.style.top=g_top; la.style.left=g_left; }
+  la.width=g_wid; la.height=g_hei;
+  var c=document.getElementById("layer"+i);
+  ctx[i]=c.getContext("2d");
+  ctx[i].strokeStyle =g_cor[i]; ctx[i].fillStyle =g_cor[i];
+}
+tbhsc.style.width=g_wid;
+
+function graf(){
+	setData();
+	for(i=0;i<=3;i++){ ctx[i].clearRect(0, 0,g_wid, g_hei); }
+	ctx[0].beginPath();
+	ctx[0].moveTo(0, 0 ); ctx[0].lineTo(g_wid, 0 );
+	for(i=0;i<3.3;i++){
+		x=(i*g_hei/vref/2);
+		ctx[0].moveTo( 0, (g_hei/2)-x ); ctx[0].lineTo( g_wid, (g_hei/2)-x);
+		ctx[0].moveTo( 0, (g_hei/2)+x ); ctx[0].lineTo( g_wid, (g_hei/2)+x);
+	}
+	ctx[0].moveTo(0, g_hei); ctx[0].lineTo(g_wid,g_hei );
+	for(i=0;i<10;i++){
+		ctx[0].moveTo(i*40,0); ctx[0].lineTo(i*40,g_hei);
+	}
+	ctx[0].stroke();
+	var p_y=0;
+	var p_x=0;
+	if(typeof myObj.wa!='undefined'){
+		for(i=0;i<3;i++){
+			if(eval("ch_en"+i).title=='1'){
+				ctx[i+1].beginPath();
+				fim=200; if(w_esc<1) fim*=w_esc;
+				for(j=0;j<fim;j++){
+					y=(j*2)*(200/fim) + 1;
+					x=g_hei-(myObj.wa[i][j]*g_hei/vref);
+					if(j==0){ p_y=y; p_x=x; }
+					ctx[i+1].moveTo(p_y, p_x ); ctx[i+1].lineTo(y, x );
+					ctx[i+1].moveTo(p_y, p_x+1 ); ctx[i+1].lineTo(y, x+1 );
+					//if(ponto.checked) ctx[i+1].arc(y, x, 3, 0, 2 * Math.PI);
+					if(pontos.title=="1") ctx[i+1].arc(y, x, 3, 0, 2 * Math.PI);
+					p_y=y;p_x=x;
+				}
+				ctx[i+1].stroke();
+			}
+		}
+	}
+	ms_div=w_us*20/1000*w_esc;
+	info.innerHTML=ms_div+"ms/div 0.5V/div";
+	tbscwr();
+}
+
+function tbscwr(){
+	ms_div=w_us*20/1000*w_esc;
+	sa='<td class=tdhsc style=width:5%></td>';
+	for(i=1;i<10;i++){
+		ib=(ms_div*i)+(w_ini*(w_us/1000));
+		sb=ib.toFixed(2);
+		if(sb.endsWith(".00")) sb=sb.substring(0,sb.length-3);
+		if( (sb.indexOf(".")>0) && sb.endsWith("0")) sb=sb.substring(0,sb.length-1);
+		sa+='<td class=tdhsc>'+sb+'</td>';
+	}
+	sa+='<td class=tdhsc style=width:5%></td>';
+	tbhsc.innerHTML=sa;
+}
+
+</script>
+</body>
+</html>
